@@ -1,0 +1,32 @@
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: gitops-wc-03
+  namespace: gitops-namepsace-test
+spec:
+  clusterNetwork:
+    services:
+      cidrBlocks: ["100.100.16.0/22"]
+    pods:
+      cidrBlocks: ["100.100.0.0/20"]
+    serviceDomain: "cluster.local"
+  topology:
+    class: builtin-generic-v3.3.0
+    version: v1.31.4---vmware.1-fips-vkr.3
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: default
+          replicas: 3
+    variables:
+      - name: vmClass
+        value: best-effort-small
+      - name: storageClass
+        value: tanzu-storage-policy
+      - name: vsphereOptions
+        value:
+          persistentVolumes:
+            defaultStorageClass: tanzu-storage-policy
