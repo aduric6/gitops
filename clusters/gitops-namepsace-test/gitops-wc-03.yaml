@@ -2,7 +2,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: gitops-wc-03
+  name: gitops-wc-04
   namespace: gitops-namepsace-test
 spec:
   clusterNetwork:
@@ -20,10 +20,10 @@ spec:
       machineDeployments:
         - class: node-pool
           name: default
-          replicas: 3
+          replicas: 1
     variables:
       - name: vmClass
-        value: best-effort-small
+        value: best-effort-xsmall
       - name: storageClass
         value: tanzu-storage-policy
       - name: vsphereOptions
